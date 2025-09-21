@@ -1,0 +1,35 @@
+names = []
+prices = []
+running = True
+
+while running:
+    student_name = input("Enter a student name (hit enter to quit): ").strip()
+
+    if student_name == "":
+        running = False
+    else:
+        while True:
+            try:
+                student_grade = input("Enter a student grade: ").strip()
+                if student_grade == "":
+                    raise ValueError("Empty input is not allowed.")
+                grade = float(student_grade)
+                if 0 <= grade <= 200:   
+                    names.append(student_name)
+                    prices.append(grade)
+                    break
+                else:
+                    print("Please enter a grade between 0 and 200.")
+            except ValueError as e:
+                print("Invalid input. Please enter a number.", e)
+
+
+if names:
+    print(f"Number of students: {len(names)}")
+    print(f"Student average grade: {sum(prices) / len(prices):.2f}")
+    max_index = prices.index(max(prices))
+    min_index = prices.index(min(prices))
+    print(f"Highest grade: {names[max_index]} with {prices[max_index]}")
+    print(f"Lowest grade: {names[min_index]} with {prices[min_index]}")
+else:
+    print("No data entered.")
